@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.File;
+
 @SpringBootTest
 public class EmailSenderTest {
 
@@ -54,6 +56,28 @@ public class EmailSenderTest {
                 recipients,
                 "This is Test Email with HTML to multiple recipients",
                 html
+        );
+    }
+
+    @Test
+    void setEmailwithAttachment(){
+
+        emailService.sendAttachmentEmail (
+                "compiler.1998@gmail.com",
+                "This is Test Email",
+                "Body of Test Email",
+                new File ("E:\\Learning\\Git_Repo\\EmailSender\\src\\main\\resources\\static\\attachment.txt")
+        );
+    }
+
+    @Test
+    void setEmailwithAttachmentMultiple(){
+        String[] recipients = {"compiler.1998@gmail.com", "compiler_1998@hotmail.com"};
+        emailService.sendAttachmentEmail (
+                recipients,
+                "This is Test Email",
+                "Body of Test Email",
+                new File ("E:\\Learning\\Git_Repo\\EmailSender\\src\\main\\resources\\static\\attachment.txt")
         );
     }
 }
